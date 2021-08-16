@@ -6,28 +6,32 @@ using UnityEngine.UI;
 public class GameCtrl : MonoBehaviour
 {
     // public Text input;
-    public InputField input;
-    public Text output;
-    public Button btn;
+    public int n_bomb;
+    public int total;
+    public Text score;
+    public Text win;
 
     // Start is called before the first frame update
     void Start()
     {
-        btn.onClick.AddListener(() => print("大家好~ " + Time.time.ToString()));
+        win.gameObject.SetActive(false);
+        score.text = "Score: " + n_bomb.ToString() + " / " + total.ToString();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-            print("你好! " + Time.time.ToString());
-
-        // output.text = Time.time.ToString() + " ; " + Time.realtimeSinceStartup.ToString(); // 使用者有在玩的時間；啟動程式至今
+        
     }
 
-    public void BtnClick()
+    public void AddScore(int s)
     {
-        output.text = input.text;
+        n_bomb += s;
+
+        score.text = "Score: " + n_bomb.ToString() + " / " + total.ToString();
+
+        if (n_bomb == total)
+            win.gameObject.SetActive(true);
     }
 }
