@@ -34,4 +34,11 @@ public class GameCtrl : MonoBehaviour
         if (n_bomb == total)
             win.gameObject.SetActive(true);
     }
+
+    public void AddBomb()
+    {
+        ++total;
+
+        score.text = "Score: " + n_bomb.ToString() + " / " + total.ToString();
+    }
 }

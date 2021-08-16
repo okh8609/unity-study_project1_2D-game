@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody2D car;
     public GameCtrl gameCtrl;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,21 @@ public class Player : MonoBehaviour
             collision.gameObject.SetActive(false);
             //Destroy(collision.gameObject);
             gameCtrl.AddScore(1);
+
+            StartCoroutine(GenBomb(collision.gameObject));
+        }
+    }
+
+    IEnumerator GenBomb(GameObject obj)
+    {
+        Debug.Log("Started Coroutine at timestamp : " + Time.time);
+        yield return new WaitForSeconds(20);
+        Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+
+        if (!gameCtrl.win.IsActive())
+        {
+            obj.SetActive(true);
+            gameCtrl.AddBomb();
         }
     }
 
